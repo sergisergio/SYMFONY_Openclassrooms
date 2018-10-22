@@ -1,18 +1,17 @@
-# src/OC/PlatformBundle/Resources/config/routing.yml# src/OC/PlatformBundle/Resources/config/routing.yml
+# src/OC/PlatformBundle/Resources/config/routing.yml
 
 byebye_world:
     path:     /byebye-world
     defaults: { _controller: OCPlatformBundle:Advert:byebye }
 
-# Page d'accueil
 oc_platform_home:
     path:      /{page}
     defaults:
         _controller: OCPlatformBundle:Advert:index
-        page: 1
-    requirements: \d*
+        page:        1
+    requirements:
+        page: \d*
 
-# Page de visualisation d'une annonce
 oc_platform_view:
     path:      /advert/{id}
     defaults:
@@ -20,21 +19,11 @@ oc_platform_view:
     requirements:
         id: \d+
 
-oc_platform_view_slug:
-    path:      /{year}/{slug}.{format}
-    defaults:
-        _controller: OCPlatformBundle:Advert:viewSlug
-        format: html
-    requirements:
-        year: \d{4}
-        format: html|xml
-
-# Ajout
 oc_platform_add:
     path:      /add
-    defaults: _controller: OCPlatformBundle:Advert:add
+    defaults:
+        _controller: OCPlatformBundle:Advert:add
 
-# Modification
 oc_platform_edit:
     path:      /edit/{id}
     defaults:
@@ -42,7 +31,6 @@ oc_platform_edit:
     requirements:
         id: \d+
 
-# Suppression
 oc_platform_delete:
     path:      /delete/{id}
     defaults:
