@@ -1,9 +1,22 @@
 # src/OC/PlatformBundle/Resources/config/routing.yml# src/OC/PlatformBundle/Resources/config/routing.yml
 
-hello_the_world:
-    path:     /hello-world
-    defaults: { _controller: OCPlatformBundle:Advert:index }
-
 byebye_world:
     path:     /byebye-world
     defaults: { _controller: OCPlatformBundle:Advert:byebye }
+
+oc_platform_home:
+    path:      /platform
+    defaults: { _controller: OCPlatformBundle:Advert:index }
+
+oc_platform_view:
+    path:      /platform/advert/{id}
+    defaults: { _controller: OCPlatformBundle:Advert:view }
+
+oc_platform_view_slug:
+    path:      /platform/{year}/{slug}.{format}
+    defaults:
+        _controller: OCPlatformBundle:Advert:viewSlug
+
+oc_platform_add:
+    path:      /platform/add
+    defaults: { _controller: OCPlatformBundle:Advert:add }
