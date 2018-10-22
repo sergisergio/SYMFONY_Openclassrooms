@@ -21,4 +21,11 @@ class AdvertController extends Controller
 
         return new Response($content);
     }
+
+    public function byebyeAction()
+    {
+        $content = $this->get('templating')->render('@OCPlatform/Advert/byebye.html.twig', array('nom' => 'Philippe'));
+
+        return new Response($content);
+    }
 }
