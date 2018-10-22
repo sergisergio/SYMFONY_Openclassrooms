@@ -5,18 +5,22 @@ byebye_world:
     defaults: { _controller: OCPlatformBundle:Advert:byebye }
 
 oc_platform_home:
-    path:      /platform
+    path:      /
     defaults: { _controller: OCPlatformBundle:Advert:index }
 
 oc_platform_view:
-    path:      /platform/advert/{id}
+    path:      /advert/{id}
     defaults: { _controller: OCPlatformBundle:Advert:view }
 
 oc_platform_view_slug:
-    path:      /platform/{year}/{slug}.{format}
+    path:      /{year}/{slug}.{format}
     defaults:
         _controller: OCPlatformBundle:Advert:viewSlug
+        format: html
+    requirements:
+        year: \d{4}
+        format: html|xml
 
 oc_platform_add:
-    path:      /platform/add
+    path:      /add
     defaults: { _controller: OCPlatformBundle:Advert:add }
