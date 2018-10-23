@@ -1,0 +1,21 @@
+{% extends "CoreBundle::layout.html.twig" %}
+
+{% block title %}
+    Accueil - {{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+    <h2>Page d'accueil</h2>
+    <div>
+        {% for message in app.session.flashbag.get('info') %}
+        <p>Message flash : {{ message }}</p>
+        {% endfor %}
+    </div>
+
+    <h3>Les 3 dernières annonces</h3>
+    {{ render(controller('OCPlatformBundle:Advert:menu', {'limit': 3})) }}
+
+    <h4><a href="{{ path('core_contact') }}" >Nous contacter</a></h4>
+
+{% endblock %}
