@@ -138,6 +138,19 @@ class AdvertController extends Controller
             // Si on n'est pas en POST, alors on affiche le formulaire
             return $this->render('@OCPlatform/Advert/add.html.twig');
         }
+
+        // Exemple d'utilisation du service AntiSpam
+
+        // On récupère le service
+        $antispam = $this->container->get('oc_platform.antispam');
+
+        // je pars du principe que $text contient le texte d'un message quelconque
+        $text = '...';
+        if ($antispam->isSpam($text)) {
+            throw new \Exception('Votre message a été détecté comme spam !');
+        }
+
+        // Ici le message n'est pas un spam
     }
 
     public function editAction($id, Request $request)
