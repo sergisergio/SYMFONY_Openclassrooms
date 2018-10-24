@@ -7,10 +7,20 @@
 {% endblock %}
 
 {% block body %}
-
-    <h2>{{ advert.title }}</h2>
-    <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                {# On vérifie qu'une image soit bien associée à l'annonce #}
+                {% if advert.image is not null %}
+                    <img src="{{ advert.image.url }}" alt="{{ advert.image.alt }}" class="img-responsive">
+                {% endif %}
+            </div>
+            <div class="col-md-9">
+                <h3>{{ advert.title }}</h3>
+                <i>Par {{ advert.author }}, le {{ advert.date|date('d/m/Y') }}</i>
+            </div>
+        </div>
+    </div>
     <div class="well">
         {{ advert.content }}
     </div>

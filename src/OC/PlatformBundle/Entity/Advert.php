@@ -54,6 +54,12 @@ class Advert
      */
     private $published = true;
 
+    /**
+     * @ORM\OneToOne(targetEntity="OC\PlatformBundle\Entity\Image", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $image;
+
     public function __construct()
     {
         // Par défaut, la date de l'annonce est la date d'aujourd'hui
@@ -180,6 +186,22 @@ class Advert
     public function setPublished($published)
     {
         $this->published = $published;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image = null)
+    {
+        $this->image = $image;
     }
 }
 
