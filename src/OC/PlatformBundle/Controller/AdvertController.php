@@ -80,13 +80,22 @@ class AdvertController extends Controller
         // qu'elle puisse l'afficher
         //$tag = $request->query->get('tag');
 
-        $advert = array(
+        /*$advert = array(
             'title'   => 'Recherche développeur Symfony2',
             'id'      => $id,
-            'author'  => 'Alexandre',
-            'content' => 'Nous recherchons un développeur Symfony2 débutant sur Lyon. Blabla…',
+            'author'  => 'Philippe',
+            'content' => 'Nous recherchons un développeur Symfony2 débutant sur Paris. Blabla…',
             'date'    => new \Datetime()
-        );
+        );*/
+
+        // On récupère le repository
+        $repository = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('OCPlatformBundle:Advert')
+        ;
+
+        // On récupère l'entité correspondante à l'id $id
+        $advert = $repository->find($id);
 
         return $this->render('@OCPlatform/Advert/view.html.twig', array(
             'advert' => $advert
