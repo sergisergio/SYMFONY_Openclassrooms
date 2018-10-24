@@ -13,5 +13,10 @@ services:
         # this means you cannot fetch services directly from the container via $container->get()
         # if you need to do this, you can override this setting on individual services
         public: false
+        # makes classes in src/AppBundle/DataFixtures available to be used as services
+        # and have a tag that allows actions to type-hint services
+    OC\PlatformBundle\DataFixtures\ORM\:
+        resource: '../../src/OC/PlatformBundle/DataFixtures/ORM'
+        tags: ['doctrine.fixture.orm']
 
 
