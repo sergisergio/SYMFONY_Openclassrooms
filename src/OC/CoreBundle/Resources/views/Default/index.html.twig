@@ -7,11 +7,10 @@
 {% block body %}
 
     <h2>Page d'accueil</h2>
-    <div>
+
         {% for message in app.session.flashbag.get('info') %}
-        <p>Message flash : {{ message }}</p>
+            <div class="alert alert-info">Message flash : {{ message }}</div>
         {% endfor %}
-    </div>
 
     <h3>Les 3 dernières annonces</h3>
     {{ render(controller('OCPlatformBundle:Advert:menu', {'limit': 3})) }}
