@@ -11,6 +11,7 @@
 namespace OC\PlatformBundle\Controller;
 
 use OC\PlatformBundle\Entity\Advert;
+use OC\PlatformBundle\Entity\Application;
 use OC\PlatformBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -154,11 +155,30 @@ class AdvertController extends Controller
         // On lie l'image à l'annonce
         $advert->setImage($image);
 
+        // Création d'une première candidature
+        $application1 = new Application();
+        $application1->setAuthor('Marine');
+        $application1->setContent("J'ai toutes les qualités requises.");
+
+        // Création d'une deuxième candidature par exemple
+        $application2 = new Application();
+        $application2->setAuthor('Pierre');
+        $application2->setContent("Je suis très motivé.");
+
+        // On lie les candidatures à l'annonce
+        $application1->setAdvert($advert);
+        $application2->setAdvert($advert);
+
         // On récupère l'EntityManager
         $em = $this->getDoctrine()->getManager();
 
         // Etape 1 : On "persiste" l'entité
         $em->persist($advert);
+
+        // Étape 1 ter : pour cette relation pas de cascade lorsqu'on persiste Advert, car la relation est
+        // définie dans l'entité Application et non Advert. On doit donc tout persister à la main ici.
+        $em->persist($application1);
+        $em->persist($application2);
 
         // Etape 2 : On "flush" tout ce qui a été persisté avant
         $em->flush();
@@ -167,7 +187,7 @@ class AdvertController extends Controller
         if ($request->isMethod('POST')) {
             // Ici, on s'occupera de la création et de la gestion du formulaire
 
-            $request->gestSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
             // Puis on redirige vers la page de visualisation de cette annonce
             return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
