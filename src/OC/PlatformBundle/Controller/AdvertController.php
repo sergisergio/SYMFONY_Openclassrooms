@@ -10,6 +10,7 @@
 
 namespace OC\PlatformBundle\Controller;
 
+use OC\PlatformBundle\Entity\Advert;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -127,28 +128,48 @@ class AdvertController extends Controller
         // La gestion d'un formulaire est particulière, mais l'idée est la suivante :
 
         // Si la requête est en POST, c'est que le visiteur a soumis le formulaire
+
+        // Création de l'entité
+        $advert = new Advert();
+        $advert->setTitle('recherche développeur Symfony.');
+        $advert->setAuthor('Philippe');
+        $advert->setContent("Nous recherchons un développeur Symfony débutant sur Paris...");
+        // On peut ne pas définir ni la date ni la publication,
+        // car ces attributs sont définis automatiquement dans le constructeur
+
+        // On récupère l'EntityManager
+        $em = $this->getDoctrine()->getManager();
+
+        // Etape 1 : On "persiste" l'entité
+        $em->persist($advert);
+
+        // Etape 2 : On "flush" tout ce qui a été persisté avant
+        $em->flush();
+
+        // Reste de la méthode qu'on avait déjà écrit
         if ($request->isMethod('POST')) {
             // Ici, on s'occupera de la création et de la gestion du formulaire
 
             $request->gestSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
 
             // Puis on redirige vers la page de visualisation de cette annonce
-            return $this->redirectToRoute('oc_platform_view', array('id' => 5));
+            return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
 
-            // Si on n'est pas en POST, alors on affiche le formulaire
-            return $this->render('@OCPlatform/Advert/add.html.twig');
+
         }
+        // Si on n'est pas en POST, alors on affiche le formulaire
+        return $this->render('@OCPlatform/Advert/add.html.twig', array('advert' => $advert));
 
         // Exemple d'utilisation du service AntiSpam
 
         // On récupère le service
-        $antispam = $this->container->get('oc_platform.antispam');
+        /*$antispam = $this->container->get('oc_platform.antispam');
 
         // je pars du principe que $text contient le texte d'un message quelconque
         $text = '...';
         if ($antispam->isSpam($text)) {
             throw new \Exception('Votre message a été détecté comme spam !');
-        }
+        }*/
 
         // Ici le message n'est pas un spam
     }
