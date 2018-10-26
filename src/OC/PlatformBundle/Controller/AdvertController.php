@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AdvertController extends Controller
 {
-    public function indexAction(/*$page*/)
+    public function indexAction($page)
     {
         // On veut avoir l'URL de l'annonce d'id 5.
         //$url = $this->get('router')->generate(
@@ -41,7 +41,7 @@ class AdvertController extends Controller
         }*/
 
         // Notre liste d'annonce en dur
-        $listAdverts = array(
+        /*$listAdverts = array(
             array(
                 'title'   => 'Recherche développeur Symfony',
                 'id'      => 1,
@@ -60,13 +60,37 @@ class AdvertController extends Controller
                 'author'  => 'Mathieu',
                 'content' => 'Nous proposons un poste pour webdesigner. Blabla…',
                 'date'    => new \Datetime())
-        );
+        );*/
+        if ($page < 1) {
+            throw new NotFoundHttpException('Page "'.$page.'" inexistante.');
+        }
+
+        // Ici je fixe le nombre d'annonces par page à 3
+        // Mais bien sûr il faudrait utiliser un paramètre, et y accéder via $this->container->getParameter('nb_per_page')
+        $nbPerPage = 3;
+
+        // Pour récupérer la liste de toutes les annonces : on utilise findAll()
+        $listAdverts = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('OCPlatformBundle:Advert')
+            ->getAdverts($page, $nbPerPage)
+        ;
+
+        // On calcule le nombre total de pages grâce au count($listAdverts) qui retourne le nombre total d'annonces
+        $nbPages = ceil(count($listAdverts) / $nbPerPage);
+
+        // Si la page n'existe pas, on retourne une 404
+        if ($page > $nbPages) {
+            throw $this->createNotFoundException("La page ".$page." n'existe pas.");
+        }
 
         // Ici, on récupère la liste des annonces, puis on la passera au template
 
         // Mais pour l'instant, on ne fait qu'appeler le template
         return $this->render('@OCPlatform/Advert/index.html.twig', array(
-            'listAdverts' => $listAdverts
+            'listAdverts' => $listAdverts,
+            'nbPages'     => $nbPages,
+            'page'        => $page,
         ));
     }
     // La route fait appel à OCPlatformBundle:Advert:view,
@@ -100,6 +124,12 @@ class AdvertController extends Controller
 
         // On récupère l'entité correspondante à l'id $id
         $advert = $repository->find($id);
+
+        // $advert est donc une instance de OC\PlatformBundle\Entity\Advert
+        // ou null si l'id $id n'existe pas, d'où ce if :
+        if (null === $advert) {
+            throw new NotFoundHttpException("L'annonce d'id ".$id." n'existe pas.");
+        }
 
         // On avait déjà récupéré la liste des candidatures
         $listApplications = $em
@@ -291,6 +321,12 @@ class AdvertController extends Controller
         // Étape 2 : On déclenche l'enregistrement
         $em->flush();
 
+        if ($request->isMethod('POST')) {
+            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien modifiée.');
+
+            return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+        }
+
         return $this->render('@OCPlatform/Advert/edit.html.twig', array(
             'advert' => $advert
         ));
@@ -331,14 +367,23 @@ class AdvertController extends Controller
         return new Response($content);
     }
 
-    public function menuAction()
+    public function menuAction($limit)
     {
         // On fixe en dur une liste ici, bien entendu par la suite
         // on la récupérera depuis la BDD !
-        $listAdverts = array(
+        $em = $this->getDoctrine()->getManager();
+
+        /*$listAdverts = array(
             array('id' => 2, 'title' => 'Recherche développeur Symfony'),
             array('id' => 5, 'title' => 'Mission de webmaster'),
             array('id' => 9, 'title' => 'Offre de stage webdesigner')
+        );*/
+
+        $listAdverts = $em->getRepository('OCPlatformBundle:Advert')->findBy(
+            array(),                 // Pas de critère
+            array('date' => 'desc'), // On trie par date décroissante
+            $limit,                  // On sélectionne $limit annonces
+            0                        // À partir du premier
         );
 
         return $this->render('@OCPlatform/Advert/menu.html.twig', array(
