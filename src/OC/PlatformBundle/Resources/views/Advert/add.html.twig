@@ -6,7 +6,7 @@
     Ajouter une annonce - {{ parent() }}
 {% endblock %}
 
-{% block ocplatform_body %}
+{% block body %}
 
     <h2>Ajouter une annonce</h2>
 
@@ -17,10 +17,10 @@
     </p>
 
     <p>
-        <a href="{{ path('oc_platform_view', {'id': advert.id}) }}" class="btn btn-default">
+        <!--<a href="{# path('oc_platform_view', {'id': advert.id}) #}" class="btn btn-default">
             <i class="glyphicon glyphicon-chevron-left"></i>
             Retour à l'annonce
-        </a>
+        </a>-->
     </p>
 
 {% endblock %}
