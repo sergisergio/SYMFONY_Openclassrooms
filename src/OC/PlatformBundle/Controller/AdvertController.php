@@ -25,6 +25,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
 class AdvertController extends Controller
 {
@@ -177,8 +179,23 @@ class AdvertController extends Controller
         return new Response($content);
     }*/
 
+
+    /**
+     * @Security("has_role('ROLE_AUTEUR')")
+     */
     public function addAction(Request $request)
     {
+        // On vérifie que l'utilisateur dispose bien du rôle ROLE_AUTEUR
+        /*if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
+            // Sinon on déclenche une exception « Accès interdit »
+            throw new AccessDeniedException('Accès limité aux auteurs.');
+        }*/
+
+        // Plus besoin du if avec le security.context, l'annotation s'occupe de tout !
+        // Dans cette méthode, vous êtes sûrs que l'utilisateur courant dispose du rôle ROLE_AUTEUR
+
+        // Ici l'utilisateur a les droits suffisant,
+        // on peut ajouter une annonce
         //$session = $request->getSession();
 
         //$session->getFlashBag()->add('info', 'Annonce bien enregistrée');
