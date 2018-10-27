@@ -10,19 +10,31 @@ services:
            - 50
 
      oc_platform.email.application_mailer:
-       class: OC\PlatformBundle\Email\ApplicationMailer
-       arguments:
-       - "@mailer"
+         class: OC\PlatformBundle\Email\ApplicationMailer
+         arguments:
+           - "@mailer"
 
      oc_platform.doctrine_listener.application_creation:
-       class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
-       arguments:
-       - "@oc_platform.email.application_mailer"
-       tags:
-       - { name: doctrine.event_listener, event: postPersist }
+         class: OC\PlatformBundle\DoctrineListener\ApplicationCreationListener
+         arguments:
+           - "@oc_platform.email.application_mailer"
+         tags:
+           - { name: doctrine.event_listener, event: postPersist }
 
-       oc_platform.validator.antiflood:                              # Le nom du service
+     oc_platform.validator.antiflood:                              # Le nom du service
          class: OC\PlatformBundle\Validator\AntifloodValidator     # La classe du service, ici notre validateur déjà créé
          arguments: ["@request_stack", "@doctrine.orm.entity_manager"] # Les données qu'on injecte au service : la requête et l'EntityManager
          tags:
-         - { name: validator.constraint_validator, alias: oc_platform_antiflood }  # C'est avec l'alias qu'on retrouvera le service
+           - { name: validator.constraint_validator, alias: oc_platform_antiflood }  # C'est avec l'alias qu'on retrouvera le service
+
+     oc_platform.twig.antispam_extension:
+         class: OC\PlatformBundle\Twig\AntispamExtension
+         arguments:
+           - "@oc_platform.antispam"
+         tags:
+           - { name: twig.extension }
+
+     oc_platform.form.ckeditor:
+       class: OC\PlatformBundle\Form\CkeditorType
+       tags:
+       - { name: form.type, alias: ckeditor }
