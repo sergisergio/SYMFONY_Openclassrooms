@@ -20,6 +20,7 @@ class AppKernel extends Kernel
             new OC\CoreBundle\CoreBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new OC\UserBundle\OCUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
