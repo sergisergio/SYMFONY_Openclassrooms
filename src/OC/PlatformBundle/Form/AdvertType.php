@@ -53,8 +53,9 @@ class AdvertType extends AbstractType
                     return $repository->getLikeQueryBuilder($pattern);
                 }
             ))
+            ->add('save',      SubmitType::class);
 
-            ->addEventListener(
+            $builder->addEventListener(
                 FormEvents::PRE_SET_DATA,    // 1er argument : L'évènement qui nous intéresse : ici, PRE_SET_DATA
                 function(FormEvent $event) { // 2e argument : La fonction à exécuter lorsque l'évènement est déclenché
                     // On récupère notre objet Advert sous-jacent
@@ -76,7 +77,7 @@ class AdvertType extends AbstractType
                 }
             )
 
-            ->add('save',      SubmitType::class);
+
     }/**
      * {@inheritdoc}
      */
