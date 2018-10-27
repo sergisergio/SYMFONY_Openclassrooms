@@ -75,7 +75,7 @@ class AdvertType extends AbstractType
                         $event->getForm()->remove('published');
                     }
                 }
-            )
+            );
 
 
     }/**
