@@ -292,14 +292,16 @@ class AdvertController extends Controller
         // Si la requête est en POST
         if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($advert);
-                $em->flush();
+            $advert->getImage()->upload();
 
-                $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($advert);
+            $em->flush();
 
-                // On redirige vers la page de visualisation de l'annonce nouvellement créée
-                return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
+            $request->getSession()->getFlashBag()->add('notice', 'Annonce bien enregistrée.');
+
+            // On redirige vers la page de visualisation de l'annonce nouvellement créée
+            return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
         }
 
 
