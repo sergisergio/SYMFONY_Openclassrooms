@@ -7,7 +7,6 @@
       <change beforePath="$PROJECT_DIR$/../KNP/code-doctrine-relations/start/src/Entity/Article.php" beforeDir="false" afterPath="$PROJECT_DIR$/../KNP/code-doctrine-relations/start/src/Entity/Article.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../KNP/code-doctrine-relations/start/src/Migrations/Version20180725195404.php" beforeDir="false" afterPath="$PROJECT_DIR$/../KNP/code-doctrine-relations/start/src/Migrations/Version20180725195404.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/form.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/form.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,16 +50,16 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="json" value="58" />
-          <entry key="php" value="5512" />
-          <entry key="twig" value="521" />
+          <entry key="php" value="5514" />
+          <entry key="twig" value="523" />
           <entry key="yml" value="614" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="58" />
-          <entry key="PHP" value="5512" />
-          <entry key="Twig" value="521" />
+          <entry key="PHP" value="5514" />
+          <entry key="Twig" value="523" />
           <entry key="YAML" value="614" />
         </counts>
       </usages-collector>
@@ -127,20 +126,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/form.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="188">
-              <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+            <state relative-caret-position="183">
+              <caret line="69" column="88" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="31" column="50" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
+            <state relative-caret-position="399">
+              <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -217,8 +216,8 @@
         <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Controller/AdvertController.php" />
         <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Form/ImageType.php" />
         <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Form/CategoryType.php" />
-        <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php" />
         <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/form.html.twig" />
+        <option value="$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php" />
       </list>
     </option>
   </component>
@@ -471,18 +470,18 @@
       <workItem from="1540227219648" duration="11833000" />
       <workItem from="1540367301840" duration="2988000" />
       <workItem from="1540411200341" duration="10329000" />
-      <workItem from="1540626382254" duration="1778000" />
+      <workItem from="1540626382254" duration="2035000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30028000" />
+    <option name="totallyTimeSpent" value="30285000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1156" y="23" width="1404" height="1319" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496329" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2496329" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -495,7 +494,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32890365" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.32890365" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -763,13 +762,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="31" column="50" selection-start-line="31" selection-start-column="50" selection-end-line="31" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/add.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
@@ -786,8 +778,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Resources/views/Advert/form.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="70" column="58" selection-start-line="70" selection-start-column="58" selection-end-line="70" selection-end-column="58" />
+        <state relative-caret-position="183">
+          <caret line="69" column="88" selection-start-line="69" selection-start-column="88" selection-end-line="69" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/OC/PlatformBundle/Form/AdvertType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="27" column="14" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
         </state>
       </provider>
     </entry>
