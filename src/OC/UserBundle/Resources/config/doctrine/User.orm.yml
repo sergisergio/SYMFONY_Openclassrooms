@@ -8,17 +8,17 @@ OC\UserBundle\Entity\User:
             id: true
             generator:
                 strategy: AUTO
-    fields:
-        username:
-            type: string
-            length: 255
-            unique: true
-        password:
-            type: string
-            length: 255
-        salt:
-            type: string
-            length: 255
-        roles:
-            type: array
+    #fields:
+        #username:
+            #type: string
+            #length: 255
+            #unique: true
+        #password:
+            #type: string
+            #length: 255
+        #salt:
+            #type: string
+            #length: 255
+        #roles:
+            #type: array
     lifecycleCallbacks: {  }
