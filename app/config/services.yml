@@ -18,5 +18,8 @@ services:
     OC\PlatformBundle\DataFixtures\ORM\:
         resource: '../../src/OC/PlatformBundle/DataFixtures/ORM'
         tags: ['doctrine.fixture.orm']
+    OC\UserBundle\DataFixtures\ORM\:
+        resource: '../../src/OC/UserBundle/DataFixtures/ORM'
+        tags: ['doctrine.fixture.orm']
 
 

@@ -3,6 +3,7 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
+        OC\UserBundle\Entity\User: plaintext
 
     role_hierarchy:
         # Un admin hérite des droits d'auteur et de modérateur
@@ -12,11 +13,17 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        #in_memory:
+            #memory:
+                #users:
+                    #user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+                    #admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        # … vous pouvez supprimer le fournisseur « in_memory »
+        # Et voici notre nouveau fournisseur :
+        main:
+            entity:
+                class:    OC\UserBundle\Entity\User
+                property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -27,6 +34,7 @@ security:
         main:
             pattern:   ^/
             anonymous: true
+            provider:  main # On change cette valeur
             form_login:
                 login_path: login
                 check_path: login_check
