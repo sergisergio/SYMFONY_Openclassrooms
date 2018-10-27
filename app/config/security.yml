@@ -3,7 +3,7 @@
 security:
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-        OC\UserBundle\Entity\User: plaintext
+        OC\UserBundle\Entity\User: sha512
 
     role_hierarchy:
         # Un admin hérite des droits d'auteur et de modérateur
@@ -21,9 +21,10 @@ security:
         # … vous pouvez supprimer le fournisseur « in_memory »
         # Et voici notre nouveau fournisseur :
         main:
-            entity:
-                class:    OC\UserBundle\Entity\User
-                property: username
+            id: fos_user.user_provider.username
+            #entity:
+                #class:    OC\UserBundle\Entity\User
+                #property: username
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -35,12 +36,20 @@ security:
             pattern:   ^/
             anonymous: true
             provider:  main # On change cette valeur
+            #form_login:
+                #login_path: login
+                #check_path: login_check
+            #logout:
+                #path:       logout
+                #target:     login
             form_login:
-                login_path: login
-                check_path: login_check
+                login_path: fos_user_security_login
+                check_path: fos_user_security_check
             logout:
-                path:       logout
-                target:     login
+                path:       fos_user_security_logout
+                target:     fos_user_security_login
+            remember_me:
+                    secret:     %secret% # %secret% est un paramètre de parameter
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
