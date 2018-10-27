@@ -14,6 +14,7 @@ use OC\PlatformBundle\Entity\Advert;
 use OC\PlatformBundle\Entity\AdvertSkill;
 use OC\PlatformBundle\Entity\Application;
 use OC\PlatformBundle\Entity\Image;
+use OC\PlatformBundle\Form\AdvertType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -197,21 +198,21 @@ class AdvertController extends Controller
         $advert = new Advert();
 
         // On crée le FormBuilder grâce au service form factory
-        $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $advert);
+        $form = $this->get('form.factory')->create(AdvertType::class, $advert);
 
         // On ajoute les champs de l'entité que l'on veut à notre formulaire
-        $formBuilder
+        /*$formBuilder
             ->add('date',      DateType::class)
             ->add('title',     TextType::class)
             ->add('content',   TextareaType::class)
             ->add('author',    TextType::class)
             ->add('published', CheckboxType::class, array('required' => false))
             ->add('save',      SubmitType::class)
-        ;
+        ;*/
         // Pour l'instant, pas de candidatures, catégories, etc., on les gérera plus tard
 
         // À partir du formBuilder, on génère le formulaire
-        $form = $formBuilder->getForm();
+        //$form = $formBuilder->getForm();
 
         /*
         $advert->setTitle('recherche développeur Symfony.');
@@ -289,15 +290,8 @@ class AdvertController extends Controller
 
 
         // Si la requête est en POST
-        if ($request->isMethod('POST')) {
-            // On fait le lien Requête <-> Formulaire
-            // À partir de maintenant, la variable $advert contient les valeurs entrées dans le formulaire par le visiteur
-            $form->handleRequest($request);
+        if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
 
-            // On vérifie que les valeurs entrées sont correctes
-            // (Nous verrons la validation des objets en détail dans le prochain chapitre)
-            if ($form->isValid()) {
-                // On enregistre notre objet $advert dans la base de données, par exemple
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($advert);
                 $em->flush();
@@ -306,14 +300,15 @@ class AdvertController extends Controller
 
                 // On redirige vers la page de visualisation de l'annonce nouvellement créée
                 return $this->redirectToRoute('oc_platform_view', array('id' => $advert->getId()));
-            }
         }
+
 
         // À ce stade, le formulaire n'est pas valide car :
         // - Soit la requête est de type GET, donc le visiteur vient d'arriver sur la page et veut voir le formulaire
         // - Soit la requête est de type POST, mais le formulaire contient des valeurs invalides, donc on l'affiche de nouveau
         // Si on n'est pas en POST, alors on affiche le formulaire
-        return $this->render('@OCPlatform/Advert/add.html.twig', array('form' => $form->createView()));
+        return $this->render('@OCPlatform/Advert/add.html.twig', array(
+            'form' => $form->createView()));
 
         // Exemple d'utilisation du service AntiSpam
 
