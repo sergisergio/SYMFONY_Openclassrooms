@@ -1,6 +1,32 @@
 Symfony Standard Edition
 ========================
 
+**PERSO**
+
+* créer un fichier parameters.yml et y mettre la config BDD.
+```
+composer install
+```
+```
+php bin/console doctrine:database:create
+```
+```
+php bin/console doctrine:schema:update --force
+```
+```
+php bin/console doctrine:fixtures:load
+```
+```
+php bin/console server:run
+```
+
+* se rendre sur http:localhost:8000/register
+* se rendre sur http:localhost:8000/logout
+* se rendre sur http:localhost:8000/login
+* créer des données advert
+* se rendre sur http:localhost:8000/platform
+* à voir pour la partie admin et le CRUD des annonces
+
 **WARNING**: This distribution does not support Symfony 4. See the
 [Installing & Setting up the Symfony Framework][15] page to find a replacement
 that fits you best.
