@@ -20,6 +20,9 @@ php bin/console doctrine:fixtures:load
 php bin/console server:run
 ```
 
+![image](https://raw.githubusercontent.com/sergisergio/SYMFONY_Openclassrooms/master/image_sf3.png)
+
+
 * se rendre sur http:localhost:8000/register
 * se rendre sur http:localhost:8000/logout
 * se rendre sur http:localhost:8000/login
